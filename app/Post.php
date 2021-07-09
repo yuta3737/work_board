@@ -16,6 +16,8 @@ class Post extends Model
     'image_path',
 ];
 
+
+
     
     public function comments()
     {
