@@ -16,11 +16,12 @@
                 <h2>title</h2>
                 <input type='text' name='title' value="{{ $post->title }}">
             </div>
-            <div class='content__body'>
+            
+            <div class='content__image'>
                 <!-- アップロードフォームの作成 -->
-                <input type="file" name="image">
+                <input type="file" name="image" value="{{ $post->image_path }}">
             </div>
-            <input type="submit" value="保存">
+            <input type="submit" value="保存" >
         </form>
         
         <div class="back">[<a href="/">back</a>]</div>
