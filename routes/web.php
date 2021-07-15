@@ -17,12 +17,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// PostController
 Route::get('/posts/create', 'PostController@create');
 Route::get('/posts/{post}', 'PostController@show');
 Route::post('/posts', 'PostController@store');
 Route::get('/posts/{post}/edit', 'PostController@edit');
 Route::put('/posts/{post}', 'PostController@update');
 Route::delete('/posts/{post}', 'PostController@delete');
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'PostController@index');
+
+// CommentController
+Route::get('/comments/{hoge}/create', 'CommentController@create');
+Route::post('/comments/{hoge}', 'CommentController@store');
+
+// HomeController
+Route::get('/home', 'HomeController@index')->name('home');
+
+
 

@@ -9,10 +9,7 @@
         <link rel="stylesheet" href="/css/app.css">
     </head>
     <body>
-        <h1>title</h1>
-        
-
-        
+    [<a href='/comments/{{ $post->id }}/create'>コメントする</a>]
         <div class='post'>
             <h2 class='title'>{{ $post->title }}</h2>
             @if ($post->image_path)
@@ -24,17 +21,14 @@
 
             <div class='comments'>
             
-           
-            
             @foreach ($comments as $comment)
-            @if($comment->post_id == $post->id)
+
                 <div class='comment'>
-                
+                    
                     <h2 class='title'>{{ $comment->body }}</h2>
                     
-                    
                 </div>
-             @endif
+
             @endforeach
           <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit</a>]</p>
             <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">

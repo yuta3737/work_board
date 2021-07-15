@@ -9,7 +9,7 @@ use App\Post;
 use App\Http\Requests\PostRequest; 
 use App\Comment;
 use Storage;
-
+use Auth;
 
 
 class PostController extends Controller
@@ -41,13 +41,18 @@ public function create(Post $post,Request $request)
       
       // バケットの`mylaravel`フォルダへアップロード
       $path = Storage::disk('s3')->putFile('mylaravel', $image, 'public');
-      
+       
       // アップロードした画像のフルパスを取得
       $post->image_path = Storage::disk('s3')->url($path);
+      
+      // タイトルを取得
       $post->title = $request->title;
-
+      
+      // ログインしているユーザーのUser_idを取得
+      $post->user_id = Auth::id();
+      
       $post->save();
-        return redirect('/posts/' . $post->id);
+      return redirect('/posts/' . $post->id);
         
     }
         
@@ -55,8 +60,9 @@ public function create(Post $post,Request $request)
     
   public function show(Post $post,Comment $comment)
   {
-     $posts = Post::all();
-     
+    // 該当するpost_idを探す
+      $comment = Comment::where('post_id', $post->id);
+      
       return view('posts.show')->with(['post' => $post,'comments' => $comment->get()]);
       
   }
@@ -68,10 +74,6 @@ public function create(Post $post,Request $request)
 
 public function update(Request $request)
 {
-    // $input_post = $request['post'];
-    // $post->fill($input_post)->save();
-
-    // return redirect('/posts/' . $post->id);
     
       $post = new Post;
       $form = $request->all();
@@ -87,7 +89,7 @@ public function update(Request $request)
       $post->title = $request->title;
 
       $post->save();
-        return redirect('/posts/' . $post->id);
+      return redirect('/posts/' . $post->id);
 }
 
 public function delete(Post $post)
