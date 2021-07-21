@@ -94,7 +94,7 @@ class CommentController extends Controller
           $comment->user_id = Auth::id();
           
           // コメントが該当する投稿のpost_idを取得
-          $comment->post_id = 10;
+         
           
           $comment->save();
             return redirect('/posts/' . $comment->post_id);
