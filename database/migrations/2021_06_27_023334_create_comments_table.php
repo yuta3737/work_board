@@ -21,10 +21,12 @@ class CreateCommentsTable extends Migration
         });    
         
         Schema::table('comments', function (Blueprint $table) {
+            // usersテーブルとの紐付け
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            // postsテーブルとの紐付け  
             $table->unsignedBigInteger('post_id')->nullable();
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });    
         
     }

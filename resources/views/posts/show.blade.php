@@ -26,7 +26,12 @@
                 <div class='comment'>
                     
                     <h2 class='title'>{{ $comment->body }}</h2>
-                    
+                    <p class="edit">[<a href="/comments/{{ $comment->id }}/edit">edit</a>]</p>
+                    <form action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post" style="display:inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">delete</button> 
+            </form> 
                 </div>
 
             @endforeach
