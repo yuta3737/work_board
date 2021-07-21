@@ -27,8 +27,11 @@ Route::delete('/posts/{post}', 'PostController@delete');
 Route::get('/', 'PostController@index');
 
 // CommentController
-Route::get('/comments/{hoge}/create', 'CommentController@create');
-Route::post('/comments/{hoge}', 'CommentController@store');
+Route::get('/comments/{post}/create', 'CommentController@create');
+Route::get('/comments/{comment}/edit', 'CommentController@edit');
+Route::post('/comments/{comment}', 'CommentController@store');
+Route::put('/comments/{comment}', 'CommentController@update');
+Route::delete('/comments/{comment}', 'CommentController@delete');
 
 // HomeController
 Route::get('/home', 'HomeController@index')->name('home');
