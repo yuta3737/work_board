@@ -17,8 +17,8 @@
                     
                       @if ($post->image_path)
                       <!-- 画像を表示 -->
-                      <img src="{{ $post->image_path }}">
-                      
+                      <!--<img src="{{ $post->image_path }}">-->
+                      <img src="https://example.s3-ap-northeast-1.amazonaws.com/{{$image}}" >
                       @endif
                 </div>
             @endforeach
