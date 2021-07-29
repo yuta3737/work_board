@@ -12,14 +12,13 @@
           @section('content')
             @foreach ($posts as $post)
                 <div class='post'>
-                    
-                    <h2 class='title'><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h2>
-                    
+                    <h2 class='title'><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h2>                    
                       @if ($post->image_path)
                       <!-- 画像を表示 -->
-                      <!--<img src="{{ $post->image_path }}">-->
-                      <img src="https://example.s3-ap-northeast-1.amazonaws.com/{{$image}}" >
+                      <img src="{{ $post->image_path }}" style="width:100px;">
+                      <!--<img src="https://example.s3-ap-northeast-1.amazonaws.com/{{ $post->image_path }}" >-->
                       @endif
+
                 </div>
             @endforeach
           @endsection  

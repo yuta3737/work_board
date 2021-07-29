@@ -49,10 +49,8 @@ public function create(Post $post,Request $request)
       $path = Storage::disk('s3')->putFile('mylaravel', $image, 'public');
       
       // アップロードした画像のフルパスを取得
-      // $post->image_path = Storage::disk('s3')->url($path);  
-      
-      $post->image_path = $path;
-      
+      $post->image_path = Storage::disk('s3')->url($path);
+      // $post->image_path = $path;
       }
       // タイトルを取得
       $post->title = $request->title;
@@ -83,8 +81,7 @@ public function create(Post $post,Request $request)
 }   
 
 public function update(Request $request,Post $post)
-{
-      // $post = new Post;
+{     // $post = new Post;
       $form = $request->all();
      
       if($request->file('image') == null){
@@ -100,9 +97,7 @@ public function update(Request $request,Post $post)
       
       // アップロードした画像のフルパスを取得
       $post->image_path = Storage::disk('s3')->url($path);
-      
       }
-      
       // タイトルを取得
       $post->title = $request->title;
       
@@ -116,14 +111,13 @@ public function update(Request $request,Post $post)
 
 public function delete(Post $post,Request $request)
 {
-  if(($request->image_path == null)){
+  if(($post->image_path == null)){
     
     $post->delete();
     
   }else{
-    $image = $request->image_path;
+    $image = $post->image_path;
     $s3_delete = Storage::disk('s3')->delete($image);
-    $db_delete = Post::where('image',$image)->delete();
     $post->delete();
   }
   
