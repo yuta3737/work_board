@@ -9,7 +9,7 @@
    <body>
     <h1 class="title">編集画面</h1>
     <div class="content">
-        <form action="/comments/{{$comment->id}}/" method="POST" enctype="multipart/form-data">
+        <form action="/comments/{{$comment->id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class='content__title'>
