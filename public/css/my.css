@@ -5,3 +5,7 @@ h2 a{
 img{
     width: 100px;
 }
+
+.comments{
+  border:5px solid yellow;
+}

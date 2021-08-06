@@ -38,6 +38,9 @@ class CommentController extends Controller
       
       // アップロードした画像のフルパスを取得
       $comment->image_path = Storage::disk('s3')->url($path);
+
+      // AmazonS3のパスを取得
+      $comment->s3_path = $path;      
       
       }
       
@@ -75,7 +78,11 @@ class CommentController extends Controller
             $image = null;
             
           }else{    
-            
+
+          // 画像を変更する際に変更前の画像をS3から削除する  
+          $s3_image = $comment->s3_path;
+          $s3_delete = Storage::disk('s3')->delete($s3_image); 
+      
           //s3アップロード開始
           $image = $request->file('image');
           
@@ -85,6 +92,8 @@ class CommentController extends Controller
           // アップロードした画像のフルパスを取得
           $comment->image_path = Storage::disk('s3')->url($path);
           
+          // AmazonS3のパスを取得
+          $comment->s3_path = $path;            
           }
           
           // 本文を取得
@@ -101,9 +110,12 @@ class CommentController extends Controller
             
         }    
         
-        public function delete(Comment $comment)
+        public function delete(Comment $comment,Request $request)
     {
+        $s3_image = $comment->s3_path;
+        $s3_delete = Storage::disk('s3')->delete($s3_image);       
         $comment->delete();
+        
         return redirect('/posts/' . $comment->post_id);
     }
         

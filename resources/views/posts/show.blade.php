@@ -27,6 +27,12 @@
                 <div class='comment'>
                     
                     <h2 class='title'>{{ $comment->body }}</h2>
+                      @if ($comment->image_path)
+                      <!-- 画像を表示 -->
+                      <img src="{{ $comment->image_path }}">
+                      
+                      @endif     
+                </div>      
                     <p class="edit">[<a href="/comments/{{ $comment->id }}/edit">edit</a>]</p>
                     <form action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post" style="display:inline">
                     @csrf
@@ -43,7 +49,7 @@
             <button type="submit">delete</button> 
             </form>  
             
-        </div>
+        
             
         </div>
         
