@@ -17,6 +17,7 @@ class CreateCommentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('body', 100);
             $table->string('image_path')->nullable();
+            $table->string('s3_path')->nullable();
             $table->timestamps();
         });    
         

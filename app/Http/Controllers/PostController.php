@@ -48,11 +48,11 @@ public function create(Post $post,Request $request)
       // バケットの`mylaravel`フォルダへアップロード
       $path = Storage::disk('s3')->putFile('mylaravel', $image, 'public');
       
-      // dd($path);
       // アップロードした画像のフルパスを取得
       $post->image_path = Storage::disk('s3')->url($path);  
       
-      // $post->image_path = $path;
+      // AmazonS3のパスを取得
+      $post->s3_path = $path;
       
       }
       // タイトルを取得
@@ -93,6 +93,11 @@ public function update(Request $request,Post $post)
         $image = null;
         
       }else{
+      
+      // 画像を変更する際に変更前の画像をS3から削除する  
+      $s3_image = $post->s3_path;
+      $s3_delete = Storage::disk('s3')->delete($s3_image); 
+      
       //s3アップロード開始
       $image = $request->file('image');
       
@@ -101,6 +106,9 @@ public function update(Request $request,Post $post)
       
       // アップロードした画像のフルパスを取得
       $post->image_path = Storage::disk('s3')->url($path);
+      
+      // AmazonS3のパスを取得
+      $post->s3_path = $path;
       
       }
       
@@ -117,18 +125,12 @@ public function update(Request $request,Post $post)
 
 public function delete(Post $post,Request $request)
 {
-  if(($request->image_path == null)){
-    
+    $s3_image = $post->s3_path;
+    $s3_delete = Storage::disk('s3')->delete($s3_image);
     $post->delete();
-    
-  }else{
-    $image = $request->image_path;
-    $s3_delete = Storage::disk('s3')->delete($image);
-    $db_delete = Post::where('image',$image)->delete();
-    $post->delete();
-  }
-  
     
     return redirect('/');
 }
+
+
 }
