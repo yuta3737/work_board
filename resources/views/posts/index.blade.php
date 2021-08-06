@@ -5,6 +5,7 @@
         <title>Board</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="{{ asset('css/my.css') }}" rel="stylesheet">
     </head>
     <body>
         <h1>Board Name</h1>
@@ -17,8 +18,8 @@
                     
                       @if ($post->image_path)
                       <!-- 画像を表示 -->
-                      <!--<img src="{{ $post->image_path }}">-->
-                      <img src="https://example.s3-ap-northeast-1.amazonaws.com/{{$image}}" >
+                      <img src="{{ $post->image_path }}">
+                      
                       @endif
                 </div>
             @endforeach

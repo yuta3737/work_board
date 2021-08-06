@@ -48,10 +48,11 @@ public function create(Post $post,Request $request)
       // バケットの`mylaravel`フォルダへアップロード
       $path = Storage::disk('s3')->putFile('mylaravel', $image, 'public');
       
+      // dd($path);
       // アップロードした画像のフルパスを取得
-      // $post->image_path = Storage::disk('s3')->url($path);  
+      $post->image_path = Storage::disk('s3')->url($path);  
       
-      $post->image_path = $path;
+      // $post->image_path = $path;
       
       }
       // タイトルを取得
