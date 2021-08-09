@@ -23,6 +23,8 @@ return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
 }
 
 
+
+
     public function comments()
     {
         return $this->hasMany('App\Comment');
