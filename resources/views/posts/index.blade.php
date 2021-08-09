@@ -8,9 +8,14 @@
         <link href="{{ asset('css/my.css') }}" rel="stylesheet">
     </head>
     <body>
-        <h1>Board Name</h1>
+        
+        <header>
+            <h1>Board 掲示板</h1>
+        </header>
+        
         <div class='posts'>
           @section('content')
+          <a href='/posts/create' class='create'>create</a>   
             @foreach ($posts as $post)
                 <div class='post'>
                     
@@ -23,10 +28,22 @@
                       @endif
                 </div>
             @endforeach
+            
+            <div class='paginate'>
+            {{ $posts->links() }}
+            </div>            
+            
+            <footer>
+                <p>©2021 Yuta Sasaki</p>
+            </footer>              
           @endsection  
-               
+          
         </div>
-        <a href='/posts/create'>create</a>
+        
+          
+        
+
+        
         @extends('layouts.app')
 
         @section('content')
@@ -50,6 +67,8 @@
             </div>
         </div>
         @endsection
+        
+
     </body>
 </html>
 
