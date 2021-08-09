@@ -12,7 +12,7 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         //
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
 
         DB::table('posts')->insert([
             'title' => 'タイトル'. $i,
@@ -20,7 +20,7 @@ class PostsTableSeeder extends Seeder
         ]);   
         }
         
-        for ($j = 4; $j <= 6; $j++) {
+        for ($j = 21; $j <= 40; $j++) {
 
         DB::table('posts')->insert([
             'title' => 'タイトル'. $j,

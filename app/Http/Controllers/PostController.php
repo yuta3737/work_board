@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use App\Post;
 use App\Http\Requests\PostRequest; 
@@ -26,7 +28,9 @@ public function create(Post $post,Request $request)
 
   public function index(Post $post)
     {
-        return view('posts.index')->with(['posts' => $post->get()]);  
+        // return view('posts.index')->with(['posts' => $post->get()]); 
+        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
+
       
     }
     
@@ -72,9 +76,11 @@ public function create(Post $post,Request $request)
   public function show(Post $post,Comment $comment)
   {
     // 該当するpost_idを探す
-      $comment = Comment::where('post_id', $post->id);
+      // $comment = Comment::where('post_id', $post->id);
+      $comment = DB::table('comments')->where('post_id', $post->id)->paginate(5);
       
-      return view('posts.show')->with(['post' => $post,'comments' => $comment->get()]);
+      // $comment_page = DB::table('comments')->paginate(5);
+      return view('posts.show')->with(['post' => $post,'comments' =>$comment]);
       
   }
      
