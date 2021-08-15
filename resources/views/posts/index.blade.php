@@ -13,6 +13,11 @@
             <h1>Board 掲示板</h1>
         </header>
         
+        <form action="/" method="GET">
+            <p><input type="text" name="keyword" value="{{$keyword}}"></p>
+            <p><input type="submit" value="検索"></p>
+        </form>
+        
         <div class='posts'>
           @section('content')
           <a href='/posts/create' class='create'>create</a>   
@@ -30,7 +35,7 @@
             @endforeach
             
             <div class='paginate'>
-            {{ $posts->links() }}
+            {{ $posts->appends(request()->input())->links() }}
             </div>            
             
             <footer>
