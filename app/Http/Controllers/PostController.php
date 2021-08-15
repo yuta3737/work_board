@@ -26,13 +26,20 @@ public function create(Post $post,Request $request)
  
 }
 
-  public function index(Post $post)
+  public function index(Post $post,Request $request)
     {
-        // return view('posts.index')->with(['posts' => $post->get()]); 
-        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
-
-      
+        $keyword = $request->keyword;
+        
+        if(!empty($keyword)) {
+ 
+            $post = DB::table('posts')->where('title', 'LIKE', '%'.$keyword.'%');
+            
+            return view('posts.index')->with(['posts' => $post->paginate(5),'keyword'=>$keyword]);
+        }else{
+           return view('posts.index')->with(['posts' => $post->getPaginateByLimit(),'keyword'=>$keyword]);
+        }
     }
+    
     
     public function store(Request $request)
     {
@@ -61,15 +68,25 @@ public function create(Post $post,Request $request)
         
         
     
-  public function show(Post $post,Comment $comment)
+  public function show(Post $post,Comment $comment,Request $request)
   {
-    // 該当するpost_idを探す
+    $keyword = $request->keyword;
+    
+    if(!empty($keyword)){
+      
+      $comment = DB::table('comments')->where('post_id', $post->id)->where('body', 'LIKE', '%'.$keyword.'%');
+      
+      return view('posts.show')->with(['post' => $post,'comments' =>$comment->paginate(5),'keyword'=>$keyword]);
+  
+    }else{
+      
+      // 該当するpost_idを探す
       // $comment = Comment::where('post_id', $post->id);
       $comment = DB::table('comments')->where('post_id', $post->id)->paginate(5);
       
-      // $comment_page = DB::table('comments')->paginate(5);
-      return view('posts.show')->with(['post' => $post,'comments' =>$comment]);
+      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword]);
       
+    }
   }
      
   public function edit(Post $post)

@@ -19,6 +19,10 @@
             @endif            
         </div>
         
+        <form action="/posts/{{ $post->id }}" method="GET">
+            <p><input type="text" name="keyword" value="{{$keyword}}"></p>
+            <p><input type="submit" value="検索"></p>
+        </form>        
 
             <div class='comments'>
             
@@ -41,7 +45,8 @@
             </form> 
             @endforeach
             </div>
-            {{ $comments->links() }}
+            
+            {{ $comments->appends(request()->input())->links() }}
             
           <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit</a>]</p>
             <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">

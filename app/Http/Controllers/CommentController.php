@@ -12,7 +12,6 @@ class CommentController extends Controller
 {
     //
   public function create(Comment $comment,Post $post)
-  // $post_id
 {
   
     return view('comments.create')->with(['comment' => $comment,'post' => $post]);
