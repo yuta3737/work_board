@@ -60,6 +60,11 @@ public function create(Post $post,Request $request)
       }
       // タイトルを取得
       $post->title = $request->title;
+      // YouTubeのurlを取得
+      $Youtube_key = $request->youtube_url;
+      $post->youtube_url = $request->youtube_url;
+      // YouTubeの埋め込みiframeに必要な11文字のみ取得
+      $post->youtube_path = substr($Youtube_key, -11);
       // ログインしているユーザーのUser_idを取得
       $post->user_id = Auth::id();
       $post->save();
@@ -96,41 +101,32 @@ public function create(Post $post,Request $request)
 
 public function update(Request $request,Post $post)
 {
-      // $post = new Post;
       $form = $request->all();
-     
       if($request->file('image') == null){
-        
         $image = null;
-        
       }else{
-      
       // 画像を変更する際に変更前の画像をS3から削除する  
       $s3_image = $post->s3_path;
       $s3_delete = Storage::disk('s3')->delete($s3_image); 
-      
       //s3アップロード開始
       $image = $request->file('image');
-      
       // バケットの`mylaravel`フォルダへアップロード
       $path = Storage::disk('s3')->putFile('mylaravel', $image, 'public');
-      
       // アップロードした画像のフルパスを取得
       $post->image_path = Storage::disk('s3')->url($path);
-      
       // AmazonS3のパスを取得
       $post->s3_path = $path;
-      
       }
-      
       // タイトルを取得
       $post->title = $request->title;
-      
+      // YouTubeのurlを取得
+      $Youtube_key = $request->youtube_url;
+      $post->youtube_url = $request->youtube_url;
+      // YouTubeの埋め込みiframeに必要な11文字のみ取得
+      $post->youtube_path = substr($Youtube_key, -11);      
       // ログインしているユーザーのUser_idを取得
       $post->user_id = Auth::id();
-     
       $post->save();
-      
       return redirect('/posts/' . $post->id);
 }
 
