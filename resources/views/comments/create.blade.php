@@ -10,8 +10,9 @@
             @csrf
             <div class="title">
                 <h2>Title</h2>
-                
                 <input type="text" name="body" placeholder="本文"/>
+                <p>YouTubeを表示する</p>
+                <input type="text" name="youtube_url" placeholder="YouTubeのurlを入力" style="width:300px" value="{{ old('post.title') }}"/>
                 <input type="hidden" value="{{$post->id}}" name="post_id">
 
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>

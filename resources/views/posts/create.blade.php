@@ -14,6 +14,8 @@
             <div class="title">
     
                 <input type="text" name="title" placeholder="タイトル" value="{{ old('post.title') }}"/>
+                <p>YouTubeを表示する</p>
+                <input type="text" name="youtube_url" placeholder="YouTubeのurlを入力" style="width:300px" value="{{ old('post.title') }}"/>
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
             <!-- アップロードフォームの作成 -->
             <input type="file" name="image">

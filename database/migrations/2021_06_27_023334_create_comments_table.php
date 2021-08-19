@@ -16,6 +16,8 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('body', 100);
+            $table->string('youtube_path')->nullable();
+            $table->string('youtube_url')->nullable();            
             $table->string('image_path')->nullable();
             $table->string('s3_path')->nullable();
             $table->timestamps();

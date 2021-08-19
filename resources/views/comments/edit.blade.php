@@ -15,6 +15,8 @@
             <div class='content__title'>
                 <h2>title</h2>
                 <input type='text' name='body' value="{{ $comment->body }}">
+                <p>YouTubeを表示する</p>
+                <input type='text' name='youtube_url' value="{{ $comment->youtube_url }}" style="width:300px">                
             </div>
             
             <div class='content__image'>
