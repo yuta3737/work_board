@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Post;
-
+use App\Comment;
 class CommentsTableSeeder extends Seeder
 {
     /**
@@ -30,8 +30,6 @@ class CommentsTableSeeder extends Seeder
         //     'post_id' => '2',
         // ]);   
         // }
-        
-        
         
         factory(App\Comment::class, 30)->create();
         
