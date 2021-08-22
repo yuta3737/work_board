@@ -13,25 +13,25 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         
-        for ($i = 1; $i <= 30; $i++) {
+        // for ($i = 1; $i <= 30; $i++) {
 
-        DB::table('comments')->insert([
-            'body' => 'this is body'. $i,
-            'user_id' => '1',
-            'post_id' => '1',
-        ]);   
-        }
+        // DB::table('comments')->insert([
+        //     'body' => 'this is body'. $i,
+        //     'user_id' => '1',
+        //     'post_id' => '1',
+        // ]);   
+        // }
         
-        for ($j = 31; $j <= 60; $j++) {
+        // for ($j = 31; $j <= 60; $j++) {
 
-        DB::table('comments')->insert([
-            'body' => 'this is body'. $j,
-            'user_id' => '2',
-            'post_id' => '2',
-        ]);   
-        }
+        // DB::table('comments')->insert([
+        //     'body' => 'this is body'. $j,
+        //     'user_id' => '2',
+        //     'post_id' => '2',
+        // ]);   
+        // }
         
-        // factory(App\Comment::class, 30)->create();
+        factory(App\Comment::class, 30)->create();
         
     }
 }
