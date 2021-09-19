@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Google_Client;
+use Google_Service_YouTube;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,7 +27,7 @@ public function create(Post $post,Request $request)
       return view('posts.create');
  
 }
-
+          
   public function index(Post $post,Request $request)
     {
         $keyword = $request->keyword;
@@ -36,12 +38,19 @@ public function create(Post $post,Request $request)
             
             return view('posts.index')->with(['posts' => $post->paginate(5),'keyword'=>$keyword]);
         }else{
-           return view('posts.index')->with(['posts' => $post->getPaginateByLimit(),'keyword'=>$keyword]);
+          return view('posts.index')->with(['posts' => $post->getPaginateByLimit(),'keyword'=>$keyword]);
         }
     }
     
     
-    public function store(Request $request)
+
+
+
+
+  
+    
+    
+    public function store(PostRequest $request)
     {
       $post = new Post;
       $form = $request->all();
@@ -71,7 +80,8 @@ public function create(Post $post,Request $request)
       return redirect('/posts/' . $post->id);
     }
         
-        
+    const MAX_SNIPPETS_COUNT = 10;
+    const DEFAULT_ORDER_TYPE = 'relevance';      
     
   public function show(Post $post,Comment $comment,Request $request)
   {
@@ -79,9 +89,9 @@ public function create(Post $post,Request $request)
     
     if(!empty($keyword)){
       
-      $comment = DB::table('comments')->where('post_id', $post->id)->where('body', 'LIKE', '%'.$keyword.'%');
+      $comment = DB::table('comments')->where('post_id', $post->id)->where('body', 'LIKE', '%'.$keyword.'%')->paginate(5);
       
-      return view('posts.show')->with(['post' => $post,'comments' =>$comment->paginate(5),'keyword'=>$keyword]);
+      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword,'comment' => $comment]);
   
     }else{
       
@@ -89,7 +99,30 @@ public function create(Post $post,Request $request)
       // $comment = Comment::where('post_id', $post->id);
       $comment = DB::table('comments')->where('post_id', $post->id)->paginate(5);
       
-      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword]);
+        // Googleへの接続情報のインスタンスを作成と設定
+        $client = new Google_Client();
+        $key ='AIzaSyCPCFjrI7aEOlKResgpSJiROxyiuHTvO5Q';
+        $client->setDeveloperKey($key);
+        $searchWord = $post->title;
+        // 接続情報のインスタンスを用いてYoutubeのデータへアクセス可能なインスタンスを生成
+        $youtube = new Google_Service_YouTube($client);
+        // dd($youtube);
+        // 必要情報を引数に持たせ、listSearchで検索して動画一覧を取得
+        $items = $youtube->search->listSearch('snippet', [
+            // 'channelId'  => $channelId,
+            'order'      => self::DEFAULT_ORDER_TYPE,
+            'maxResults' => self::MAX_SNIPPETS_COUNT,
+            'type'=> 'video',
+            'q' => $searchWord,
+            
+        ]);
+        
+        // dd($items);
+        // 連想配列だと扱いづらいのでcollection化して処理
+        $snippets = collect($items->getItems())->all();      
+      
+      
+      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword,'snippets' => $snippets]);
       
     }
   }
@@ -99,7 +132,7 @@ public function create(Post $post,Request $request)
     return view('posts.edit')->with(['post' => $post]);
 }   
 
-public function update(Request $request,Post $post)
+public function update(PostRequest $request,Post $post)
 {
       $form = $request->all();
       if($request->file('image') == null){

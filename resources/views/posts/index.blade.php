@@ -8,42 +8,46 @@
         <link href="{{ asset('css/my.css') }}" rel="stylesheet">
     </head>
     <body>
+        @section('content')
         
-        <header>
-            <h1>Board 掲示板</h1>
-        </header>
-        
-        <form action="/" method="GET">
-            <p><input type="text" name="keyword" value="{{$keyword}}"></p>
-            <p><input type="submit" value="検索"></p>
-        </form>
-        
-        <div class='posts'>
-          @section('content')
-          <a href='/posts/create' class='create'>create</a>   
+          
+            <div class="container">
+            
+            <form action="/" method="GET" class="search">
+                <p><input type="text" name="keyword" value="{{$keyword}}">
+                <input type="submit" value="検索"></p>
+            </form>    
+            
+            <div class="button03">
+                <a href='/posts/create'>新しく投稿する</a>   
+            </div>    
+
+            <div class='posts'>
             @foreach ($posts as $post)
+                <a href="/posts/{{ $post->id }}">
                 <div class='post'>
-                    
-                    <h2 class='title'><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h2>
-                    
                       @if ($post->image_path)
                       <!-- 画像を表示 -->
-                      <img src="{{ $post->image_path }}">
-                      
+                        <div class="image">
+                            <img src="{{ $post->image_path }}"> 
+                        </div>                    
                       @endif
+                     <h2 class='title'>{{ $post->title }}</h2>       
                 </div>
+                </a>
             @endforeach
+            </div> 
             
             <div class='paginate'>
             {{ $posts->appends(request()->input())->links() }}
             </div>            
-            
+            </div>
             <footer>
                 <p>©2021 Yuta Sasaki</p>
-            </footer>              
+            </footer> 
           @endsection  
           
-        </div>
+        
         
           
         

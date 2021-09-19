@@ -80,8 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+    'locale' => 'ja',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -106,7 +105,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'ja_JP',
 
     /*
     |--------------------------------------------------------------------------
@@ -227,5 +226,5 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+'key_name' => env('GOOGLE_API_KEY'),//追記
 ];

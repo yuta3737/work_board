@@ -1,21 +1,375 @@
-h2 a{
-  color:red;
+/*共通*/
+header{
+  text-align: center;
+  padding-top: 10px;
 }
 
 img{
     width: 100px;
 }
 
-.comments{
-  border:5px solid yellow;
-}
-
-.create{
-  padding:5px 30px 0px 30px;
-  border:1px solid black;
-}
-
 footer {
     text-align: center;
+    background-color: #444444;
+    color: white;
+    margin-top: 30px;
+    padding:10px 0;
 }
+
+footer p{
+  margin:0;
+}
+
+.flexbox{
+  display: flex;
+}
+
+.center{margin: 0 auto;}
+
+.margin_top{
+  margin-top: 30px;
+}
+
+.clear{
+  clear: both;
+}
+/*-----------------ボタン--------------------*/
+.button1 {
+  display       : inline-block;
+  font-size     : 11pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 9px 33px;   /* 余白       */
+  background    : #1a1aff;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  /*box-shadow    : 5px 5px 3px #666666;   影の設定 */
+  border        : 2px solid #1a1aff;    /* 枠の指定 */
+}
+.button1:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #1a1aff;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+
+
+.button02 a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 150px;
+    padding: 5px 20px;
+    color: #333;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #cccccc;
+    transition: 0.3s;
+}
+
+.button02 a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+  transform: rotate(45deg);
+}
+
+.button02 a:hover {
+  text-decoration: none;
+  background-color: #bbbbbb;
+}
+
+
+
+.button03 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 0 0;
+  padding: 0.4em 0.8em;
+  width: 250px;
+  color: #2285b1;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid #2285b1;
+}
+
+.button03 a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #2285b1;
+  border-right: 3px solid #2285b1;
+  transform: rotate(45deg);
+}
+
+.button03 a:hover {
+  color: #333333;
+  text-decoration: none;
+  background-color: #a0c4d3;
+}
+
+.button03 a:hover::after {
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+}
+
+
+.button4 {
+  margin        : 0 10px; 
+  display       : inline-block;
+  font-size     : 11pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 5px 33px;   /* 余白       */
+  background    : rgb(204, 204, 204);     /* 背景色     */
+  color         : #333 ;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  /*box-shadow    : 5px 5px 3px #666666;   影の設定 */
+  border        : 2px solid rgb(204, 204, 204);    /* 枠の指定 */
+}
+
+.button4:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #1a1aff;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+
+
+/*-----------------ボタン--------------------*/
+
+.search{
+  float:right;
+}
+
+
+
+/*---------index.blade.php トップページ-------------*/
+.posts{
+  padding:30px 0px;
+}
+
+.posts a:hover{
+  color: #333333;
+  text-decoration: none;
+  background-color: #a0c4d3;
+}
+
+.post{
+  position: relative;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0px 1px 1px 0px #a5a9ab;
+  display: flex;
+}
+
+.post h2{
+  padding: 0px 0px 0px 20px;
+}
+
+/*-----------------------create.blade.php　新規投稿ページ ----------------------*/
+
+
+.create{
+  margin: 30px auto;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: white;
+}
+
+.create_header{
+  margin-bottom:20px;
+  padding: 15px 0 5px 20px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.create_header h1{
+  font-size: 15px;
+}
+
+.create_input{
+    display: block;
+    font-weight: 400;
+    color: #495057;
+    width: 100%;
+    padding: 5px 0px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.create_form{
+  padding: 20px 0 0px 0;
+}
+
+.create_form p{
+  font-size: 17px;
+}
+
+.create_tit,.create_youtube,.create_file{
+    display: flex;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.create_rule{
+  text-align: center;
+  color: red;
+}
+
+
+/*-----------------------show.blade.php 詳細ページ ----------------------*/
+.show_post{
+  padding: 30px 0;
+}
+
+.first_row{
+  padding: 0 0px 20px 15px;
+  display: flex;
+}
+
+
+.second_row img{
+  height: 315px;
+  width: auto;
+  max-width: 100%;
+  
+}
+
+.second_row{
+  display: flex;
+  margin-top: 30px;
+}
+
+.show_form{
+  display: flex;
+  padding: 0px 0;
+  margin: 30px 0 0 0;
+}
+
+
+
+.show_end{
+  display: flex;
+  margin: 0 0 30px 0;
+}
+
+.iframe iframe{
+  width: 100%;
+  height: 100%;
+}
+
+/*------------------show.blade.php コメントページ --------------*/
+
+.comments{
+  padding:30px 0px;
+}
+
+.comment{
+  position: relative;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0px 1px 1px 0px #a5a9ab;
+}
+
+.comment p{
+  padding: 10px 0 5px 30px;
+  font-size: 18px;
+}
+
+.comment_image{
+  margin:0 auto;
+}
+
+.comment_image img{
+    height: auto;
+    width: 100%;
+    max-width: 90%;
+}
+
+.comment_iframe iframe{
+  width: 100%;
+  height: 100%;
+}
+
+.comment_picture{
+  display: flex;
+}
+.comment_command{
+  display: flex;
+}
+
+.comment_form{
+    position: relative;
+    padding: 20px;
+    margin: 24px 0;
+    border-radius: 4px;
+    border: 2px solid #cad0d3;
+    background: #e1e5e7;
+}
+
+.comment_create{
+  display: flex;
+}
+
+.comment_create p{
+  margin:10px 0;
+}
+
+.comment_save{
+  margin: 10px 0;
+}
+
+.comment_reply{
+  display: none;
+}
+
+
+
+.youtube_content{
+  float: right;
+  margin-top: 30px;
+}
+
+
+
+
+
+
+
+/*-----------------------edit.blade.php post 編集ページ ----------------------*/
+
+.edit{
+  margin: 30px auto;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
