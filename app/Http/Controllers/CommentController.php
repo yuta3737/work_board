@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest; 
 use App\Comment;
 use App\Post;
 use Storage;
@@ -18,9 +19,9 @@ class CommentController extends Controller
     // ->with(['post_id' => $post_id])
 }
 
-  public function store(Request $request)
+  public function store(CommentRequest $request)
     {
-      $comment = new Comment; // $form = $request->all();
+      $comment = new Comment;
       if($request->file('image') == null){
         $image = null;
       }else{
@@ -35,6 +36,8 @@ class CommentController extends Controller
       }
       // 本文を取得
       $comment->body = $request->body;
+      // 返信したいときのみ
+      $comment->reply = $request->reply;
       
       $Youtube_key = $request->youtube_url;
       $comment->youtube_url = $request->youtube_url;
@@ -57,7 +60,7 @@ class CommentController extends Controller
         
         
         
-    public function update(Request $request,Comment $comment)
+    public function update(CommentRequest $request,Comment $comment)
         {// $form = $request->all();
           if($request->file('image') == null){
             $image = null;

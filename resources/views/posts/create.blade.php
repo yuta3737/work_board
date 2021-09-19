@@ -4,27 +4,59 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Board</title>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="{{ asset('css/my.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     
     <body>
-        
-        <h1>Board Name</h1>
-        <form action="/posts" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="title">
-    
-                <input type="text" name="title" placeholder="タイトル" value="{{ old('post.title') }}"/>
-                <p>YouTubeを表示する</p>
-                <input type="text" name="youtube_url" placeholder="YouTubeのurlを入力" style="width:300px" value="{{ old('post.title') }}"/>
-                <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
-            <!-- アップロードフォームの作成 -->
-            <input type="file" name="image">
+        <div class="container">
+        <div class="col-md-8 center">  
+        <div class="create">  
+            <div class="create_header">
+                <h1>新規作成</h1>
             </div>
-            
-            <input type="submit" value="保存"/>
+        <form action="/posts" method="POST" enctype="multipart/form-data" class="create_form">
+            @csrf
+                <div class="create_tit">
+                    <div class="col-md-4">
+                    <p>タイトル</p>
+                    </div>
+                    <div class="col-md-6">
+                    <input type="text" name="title" placeholder="" class="create_input"/> 
+                    <p class="title__error" style="color:red;text-align:left">{{ $errors->first('title') }}</p>
+                    </div>                    
+                </div>
+                <div class="create_youtube">
+                    <div class="col-md-4">
+                    <p>YouTubeを表示する</p>
+                    </div>
+                    <div class="col-md-6">
+                    <input type="text" name="youtube_url" placeholder="YouTubeのurlを入力" class="create_input" value="{{ old('post.title') }}"/>
+                    </div>
+                </div>
+                
+            <!-- アップロードフォームの作成 -->
+                <div class="create_file">
+                    <div class="col-md-4">
+                    <p>画像を表示する</p>
+                    </div>
+                    <div class="col-md-6">
+                    <input type="file" name="image">
+                    </div>  
+                </div>
+                <p class="create_rule">※画像,YouTube urlは入力しなくても良い</p>
+                <div class="col-md-6 offset-md-4">
+                    <input type="submit" value="保存" class="btn btn-primary" style="width:80px"/>
+                </div>
+                <div class="button03 margin_top"><a href="/">戻る</a></div>
         </form>
         
-        <div class="back">[<a href="/">back</a>]</div>
+        
+        </div>
+        </div>
+        </div>
     </body>
 </html>
 
