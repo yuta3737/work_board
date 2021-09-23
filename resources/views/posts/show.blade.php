@@ -139,7 +139,6 @@
                     <a href="/comments/{{ $comment->id }}/edit">編集する</a>
                     </div>   
                     
-                    <button id="sample" class="button4 henshin sample">返信する</button>
                     <form class="col-md-4 flexbox" action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post">
                     @csrf
                     @method('DELETE')
@@ -186,10 +185,7 @@
             <button type="submit" class="button1">delete</button> 
             </form>              
             </div>
-            
-
-    
-            
+        
         </div>
         
     <script text="javascript" src="{{ asset('js/show.js') }}"></script>

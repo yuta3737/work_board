@@ -13,7 +13,7 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         
-        for ($i = 1; $i <= 30; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
 
         DB::table('comments')->insert([
             'body' => 'this is body'. $i,
@@ -22,7 +22,7 @@ class CommentsTableSeeder extends Seeder
         ]);   
         }
         
-        for ($j = 31; $j <= 60; $j++) {
+        for ($j = 11; $j <= 20; $j++) {
 
         DB::table('comments')->insert([
             'body' => 'this is body'. $j,
