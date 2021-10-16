@@ -69,18 +69,13 @@ public function create(Post $post,Request $request)
       }
       // タイトルを取得
       $post->title = $request->title;
-      // YouTubeのurlを取得
-      $Youtube_key = $request->youtube_url;
-      $post->youtube_url = $request->youtube_url;
-      // YouTubeの埋め込みiframeに必要な11文字のみ取得
-      $post->youtube_path = substr($Youtube_key, -11);
       // ログインしているユーザーのUser_idを取得
       $post->user_id = Auth::id();
       $post->save();
       return redirect('/posts/' . $post->id);
     }
         
-    const MAX_SNIPPETS_COUNT = 10;
+    const MAX_SNIPPETS_COUNT = 7;
     const DEFAULT_ORDER_TYPE = 'relevance';      
     
   public function show(Post $post,Comment $comment,Request $request)
@@ -89,15 +84,15 @@ public function create(Post $post,Request $request)
     
     if(!empty($keyword)){
       
-      $comment = DB::table('comments')->where('post_id', $post->id)->where('body', 'LIKE', '%'.$keyword.'%')->paginate(5);
+      $comment = DB::table('comments')->where('post_id', $post->id)->where('body', 'LIKE', '%'.$keyword.'%')->paginate(10);
       
-      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword,'comment' => $comment]);
+      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword,'comment' =>$comment]);
   
     }else{
       
       // 該当するpost_idを探す
       // $comment = Comment::where('post_id', $post->id);
-      $comment = DB::table('comments')->where('post_id', $post->id)->latest('created_at')->paginate(5);
+      $comment = DB::table('comments')->where('post_id', $post->id)->latest('created_at')->paginate(10);
       
         // Googleへの接続情報のインスタンスを作成と設定
         $client = new Google_Client();
@@ -122,7 +117,7 @@ public function create(Post $post,Request $request)
         $snippets = collect($items->getItems())->all();      
       
       
-      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword,'snippets' => $snippets]);
+      return view('posts.show')->with(['post' => $post,'comments' =>$comment,'keyword'=>$keyword,'snippets' => $snippets,'comment' =>$comment]);
       
     }
   }

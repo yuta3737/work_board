@@ -16,8 +16,6 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title', 50);
-            $table->string('youtube_path')->nullable();
-            $table->string('youtube_url')->nullable();
             $table->string('image_path')->nullable();
             $table->string('s3_path')->nullable();
             $table->timestamps();

@@ -1,23 +1,35 @@
 /*共通*/
+html {
+  scroll-behavior: smooth;
+}
+
 header{
   text-align: center;
   padding-top: 10px;
 }
 
-img{
-    width: 100px;
+.header_img{
+  width: 30px;
+  height: 30px;
 }
 
 footer {
     text-align: center;
     background-color: #444444;
     color: white;
-    margin-top: 30px;
+    margin-bottom: -25px;
+    margin-top: 40px;
     padding:10px 0;
 }
 
 footer p{
   margin:0;
+}
+
+body{
+  background-image: url(../images/01.jpg);
+  background-size: cover;
+  background-position-x: 30%;
 }
 
 .flexbox{
@@ -59,10 +71,10 @@ footer p{
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    width: 150px;
-    padding: 5px 20px;
+    width: 120px;
+    padding: 2.5px 10px;
     color: #333;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     background-color: #cccccc;
     transition: 0.3s;
@@ -91,10 +103,10 @@ footer p{
   margin: 0 auto 0 0;
   padding: 0.4em 0.8em;
   width: 250px;
-  color: #2285b1;
+  color: black;
   font-size: 14px;
   font-weight: 700;
-  border: 2px solid #2285b1;
+  border: 2px solid black;
 }
 
 .button03 a::after {
@@ -119,18 +131,22 @@ footer p{
 
 
 .button4 {
-  margin        : 0 10px; 
-  display       : inline-block;
-  font-size     : 11pt;        /* 文字サイズ */
-  text-align    : center;      /* 文字位置   */
-  cursor        : pointer;     /* カーソル   */
-  padding       : 5px 33px;   /* 余白       */
-  background    : rgb(204, 204, 204);     /* 背景色     */
-  color         : #333 ;     /* 文字色     */
-  line-height   : 1em;         /* 1行の高さ  */
-  transition    : .3s;         /* なめらか変化 */
-  /*box-shadow    : 5px 5px 3px #666666;   影の設定 */
-  border        : 2px solid rgb(204, 204, 204);    /* 枠の指定 */
+    margin: 0 10px;
+    display: inline-block;
+    font-size: 11pt;
+    text-align: center;
+    cursor: pointer;
+    padding: 0px;
+    height: 22px;
+    width: 100px;
+    background: rgb(204, 204, 204);
+    color: #333;
+    font-size: 10px;
+    transition: .3s;
+    border: 2px solid rgb(204, 204, 204);
+}
+
+
 }
 
 .button4:hover {
@@ -161,8 +177,8 @@ footer p{
 
 .post{
   position: relative;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 7px 10px;
+  margin-bottom: 20px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0px 1px 1px 0px #a5a9ab;
@@ -170,7 +186,13 @@ footer p{
 }
 
 .post h2{
-  padding: 0px 0px 0px 20px;
+  padding: 5px 0px 0px 20px;
+}
+
+.post img{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
 }
 
 /*-----------------------create.blade.php　新規投稿ページ ----------------------*/
@@ -235,17 +257,24 @@ footer p{
   display: flex;
 }
 
-
-.second_row img{
-  height: 315px;
-  width: auto;
-  max-width: 100%;
-  
+.second_row{
+  position: relative;
+  padding: 7px 10px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0px 1px 1px 0px #a5a9ab;
+  display: flex;
 }
 
-.second_row{
-  display: flex;
-  margin-top: 30px;
+.second_row h2{
+  padding: 5px 0px 0px 20px;
+}
+
+.second_row img{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
 }
 
 .show_form{
@@ -274,7 +303,7 @@ footer p{
 
 .comment{
   position: relative;
-  padding: 15px;
+  padding: 10px 15px;
   margin-bottom: 10px;
   border-radius: 2px;
   background: #fff;
@@ -282,8 +311,18 @@ footer p{
 }
 
 .comment p{
-  padding: 10px 0 5px 30px;
-  font-size: 18px;
+  padding: 0px 0 0px 30px;
+  font-size: 15px;  
+}
+
+.comment_id{
+  display: flex;
+}
+
+.comment_id p{
+  font-size: 13px;
+  margin: 0 15px 0 auto;
+  color: darkgray;
 }
 
 .comment_image{
@@ -304,6 +343,10 @@ footer p{
 .comment_picture{
   display: flex;
 }
+
+
+
+
 .comment_command{
   display: flex;
 }
@@ -333,6 +376,10 @@ footer p{
   display: none;
 }
 
+#reply_comment{
+  display: flex;
+}
+
 
 
 .youtube_content{
@@ -340,7 +387,51 @@ footer p{
   margin-top: 30px;
 }
 
+.youtube_link{
+    display: flex;
+    height: 110px;
+    overflow: hidden;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: bisque;
+}
 
+.youtube_head {
+    height: auto;
+    line-height: normal;
+    padding: 7px 8px 7px 7px;
+    color: #fff;
+    position: relative;
+    background-color: #19202a;
+}
+
+.youtube_head:after{
+    content: ' ';
+    background-color: #0099FF;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: 3px;
+    left: 0;  
+}
+
+.youtube_head h2{
+  font-size: 20px;
+  margin: 0;
+}
+
+.youtube_title {
+    font-size: 11px;
+    margin-left: 10px;
+    color: black;
+
+}
+
+.youtube_videos{
+    background: white;
+    width: auto;
+    height: auto;
+}
 
 
 

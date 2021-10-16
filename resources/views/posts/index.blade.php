@@ -26,13 +26,18 @@
             @foreach ($posts as $post)
                 <a href="/posts/{{ $post->id }}">
                 <div class='post'>
-                      @if ($post->image_path)
+                      @if ($post->image_path == null)
+                      <!-- 画像を表示 -->
+                        <div class="image">
+                            <img src="{{ asset('images/02.png') }}">                             
+                        </div>    
+                      @else($post->image_path)
                       <!-- 画像を表示 -->
                         <div class="image">
                             <img src="{{ $post->image_path }}"> 
-                        </div>                    
+                        </div>    
                       @endif
-                     <h2 class='title'>{{ $post->title }}</h2>       
+                     <h2 class='title'>{{ $post->title }}</h2>
                 </div>
                 </a>
             @endforeach

@@ -34,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <img class="header_img" src="{{ asset('images/116.png') }}"> 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
