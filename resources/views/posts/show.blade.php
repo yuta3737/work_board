@@ -8,14 +8,12 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
         <link href="{{ asset('css/my.css') }}" rel="stylesheet">
-        <link href="{{ asset('js/show.js') }}">
+        
         
     </head>
     <body>
     <div class="container">
         <div class='show_post'>
-            
-            <h2 class='title col-md-6'>{{ $post->title }}</h2>
             
             <div class='first_row'>
             <div class="button03 col-md-4">    
@@ -28,54 +26,62 @@
                     
             
             </div>
+            
             <div class='second_row'>
-            @if ($post->youtube_path == null )
-            <!--何もなし-->
-            @else
-            <div class="iframe col-md-6">
-            <iframe  src="https://www.youtube.com/embed/{{ $post->youtube_path }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-            </iframe>
-            </div> 
-            @endif
-            @if ($post->image_path)
-            <!-- 画像を表示 -->
-            <div class="image col-md-6">
-                <img src="{{ $post->image_path }}"> 
-            </div>                    
-            @endif             
-            </div>
+                 @if ($post->image_path == null)
+                <!-- 画像を表示 -->
+                <div class="image">
+                    <img src="{{ asset('images/02.png') }}">                             
+                </div>    
+                @else($post->image_path)
+                <!-- 画像を表示 -->
+                <div class="image">
+                    <img src="{{ $post->image_path }}"> 
+                </div>    
+                @endif
+                <h2 class='title'>{{ $post->title }}</h2>       
+            </div>            
           
         </div>
 
             <div class="youtube_content col-md-4">
             <div class="youtube_body">
+                <div class="youtube_head">
+                    <h2>関連動画</h2>
+                </div>    
                 @foreach ($snippets as $snippet)
                     <div class="youtube_videos">
-                        <div class="youtube_link">
                         <a href="https://youtu.be/{{ $snippet->id->videoId }}">
+                        <div class="youtube_link">    
+                            <div class="youtube_img">
+                                <img src="{{ $snippet->snippet->thumbnails->default->url}}"> 
+                            </div> 
                             
-                        <div class="youtube_img">
-                            <img src="{{ $snippet->snippet->thumbnails->default->url}}"> 
+                            <div class="youtube_title">
+                                {{ $snippet->snippet->title }}
+                            </div>
                         </div> 
-                        
-                        <div class="youtube_title">
-                            {{ $snippet->snippet->title }}
-                        </div>
-                        
                         </a>
-                        </div>
                     </div>
+                    
                 @endforeach
-            </div>
             </div>    
+            </div>
+              
     
-        <form action="/comments/{{$post->id}}" class="comment_form col-md-8" method="POST" enctype="multipart/form-data">
+        <form name="faceForm" id="move"　action="/comments/{{$post->id}}" class="comment_form col-md-8" method="POST" enctype="multipart/form-data">
             @csrf
-                <input class="" type="text" name="reply" placeholder="返信したい投稿のIDを記入"/>
+                <input  name="face" type="hidden" name="reply" placeholder="返信したい投稿のIDを記入"/>
+                <div id="reply_comment">
+                    
+                </div>                
+                
+                
                 <textarea class="col-md-12" type="text" name="body" placeholder="コメントを書く"></textarea>
                 <p class="title__error" style="color:red;text-align:left">{{ $errors->first('body') }}</p>
                 <div class="comment_create">
                 <p class="col-md-6">YouTubeを表示する</p>
+
                 <input class="col-md-6" type="text" name="youtube_url" placeholder="YouTubeのurlを入力" style="width:300px" value="{{ old('post.title') }}"/>
                 </div>
                 
@@ -85,6 +91,7 @@
                 <input class="comment_save col-md-8" type="file" name="image">
                 </div>
                 <input class="btn btn-primary" type="submit" value="コメントする"/>
+                
         </form>
         
 
@@ -112,8 +119,12 @@
             @foreach ($comments as $comment)
 
                 <div class='comment col-md-8' id='comment_{{$comment->id}}'>
-                      <a href="#comment_{{$comment->reply}}">>>{{$comment->reply}}</a>
-                      <p>{{ $comment->id }}</p>
+                    
+                      <div class='comment_id'>
+                          <a href="#comment_{{$comment->reply}}"> >>{{$comment->reply}}</a>
+                          <p>ID : {{ $comment->id }}</p>                         
+                      </div>
+                      
                       <div class='comment_picture'>
                       @if ($comment->youtube_path == null )
                       <!--何もなし-->
@@ -136,14 +147,18 @@
                       
                     <div class="comment_command">  
                     <div class="button02">    
+                    
                     <a href="/comments/{{ $comment->id }}/edit">編集する</a>
                     </div>   
                     
-                    <form class="col-md-4 flexbox" action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post">
+                    <form class="flexbox" action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="button4">消去する</button>
                     </form> 
+                    
+                    <a href="#move"><button class="btn2 button4" value="{{$comment->id}}">返信する</button></a>
+                    </a>
                     </div>  
                 </div>
                 
@@ -188,6 +203,6 @@
         
         </div>
         
-    <script text="javascript" src="{{ asset('js/show.js') }}"></script>
+    <script type="module" text="javascript" src="{{ asset('js/show.js') }}"></script>
     </body>
 </html>

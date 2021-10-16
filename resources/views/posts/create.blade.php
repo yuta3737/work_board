@@ -28,25 +28,17 @@
                     <p class="title__error" style="color:red;text-align:left">{{ $errors->first('title') }}</p>
                     </div>                    
                 </div>
-                <div class="create_youtube">
-                    <div class="col-md-4">
-                    <p>YouTubeを表示する</p>
-                    </div>
-                    <div class="col-md-6">
-                    <input type="text" name="youtube_url" placeholder="YouTubeのurlを入力" class="create_input" value="{{ old('post.title') }}"/>
-                    </div>
-                </div>
                 
             <!-- アップロードフォームの作成 -->
                 <div class="create_file">
                     <div class="col-md-4">
-                    <p>画像を表示する</p>
+                    <p>サムネイル</p>
                     </div>
                     <div class="col-md-6">
                     <input type="file" name="image">
                     </div>  
                 </div>
-                <p class="create_rule">※画像,YouTube urlは入力しなくても良い</p>
+                <p class="create_rule">※タイトルは必ず入力する</p>
                 <div class="col-md-6 offset-md-4">
                     <input type="submit" value="保存" class="btn btn-primary" style="width:80px"/>
                 </div>
