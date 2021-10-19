@@ -92,7 +92,7 @@ public function create(Post $post,Request $request)
       
       // 該当するpost_idを探す
       // $comment = Comment::where('post_id', $post->id);
-      $comment = DB::table('comments')->where('post_id', $post->id)->latest('created_at')->paginate(10);
+      $comment = DB::table('comments')->where('post_id', $post->id)->latest('created_at','desc')->paginate(10);
       
         // Googleへの接続情報のインスタンスを作成と設定
         $client = new Google_Client();
