@@ -16,11 +16,11 @@ class Post extends Model
     'image_path',
 ];
 
-public function getPaginateByLimit(int $limit_count = 10)
-{
-// updated_atで降順に並べたあと、limitで件数制限をかける
-return $this->latest('updated_at','desc')->paginate($limit_count);
-}
+// public function getPaginateByLimit(int $limit_count = 10)
+// {
+// // updated_atで降順に並べたあと、limitで件数制限をかける
+// return $this->latest('updated_at','desc')->paginate($limit_count);
+// }
 
     public function comments()
     {

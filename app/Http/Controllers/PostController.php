@@ -38,7 +38,9 @@ public function create(Post $post,Request $request)
             
             return view('posts.index')->with(['posts' => $post->paginate(5),'keyword'=>$keyword]);
         }else{
-          return view('posts.index')->with(['posts' => $post->getPaginateByLimit(),'keyword'=>$keyword]);
+          $post = Post::orderBy('updated_at', 'desc');
+          
+          return view('posts.index')->with(['posts' => $post->paginate(10),'keyword'=>$keyword]);
         }
     }
     
@@ -92,7 +94,7 @@ public function create(Post $post,Request $request)
       
       // 該当するpost_idを探す
       // $comment = Comment::where('post_id', $post->id);
-      $comment = DB::table('comments')->where('post_id', $post->id)->latest('created_at','desc')->paginate(10);
+      $comment = DB::table('comments')->where('post_id', $post->id)->orderBy('created_at', 'desc')->paginate(10);
       
         // Googleへの接続情報のインスタンスを作成と設定
         $client = new Google_Client();
@@ -147,11 +149,6 @@ public function update(PostRequest $request,Post $post)
       }
       // タイトルを取得
       $post->title = $request->title;
-      // YouTubeのurlを取得
-      $Youtube_key = $request->youtube_url;
-      $post->youtube_url = $request->youtube_url;
-      // YouTubeの埋め込みiframeに必要な11文字のみ取得
-      $post->youtube_path = substr($Youtube_key, -11);      
       // ログインしているユーザーのUser_idを取得
       $post->user_id = Auth::id();
       $post->save();
