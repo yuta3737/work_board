@@ -14,9 +14,11 @@ protected $fillable = [
     'image_path',
 ];
 
+protected $touches = ['post'];
 
     public function post()
     {
+        
         return $this->belongsTo('App\Post');
     }
     
