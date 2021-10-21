@@ -38,7 +38,9 @@ public function create(Post $post,Request $request)
             
             return view('posts.index')->with(['posts' => $post->paginate(5),'keyword'=>$keyword]);
         }else{
-          $post = Post::orderBy('updated_at', 'desc');
+          
+          $post = DB::table('posts')
+          ->orderBy('updated_at', 'desc');
           
           return view('posts.index')->with(['posts' => $post->paginate(10),'keyword'=>$keyword]);
         }
