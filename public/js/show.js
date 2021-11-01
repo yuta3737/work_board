@@ -32,3 +32,21 @@ text3.addEventListener("click",function loseTF()
     text1.remove();
     text3.remove();
 });
+
+
+document.addEventListener('DOMContentLoaded',function(){
+var edit = document.querySelectorAll(".edit_btn");
+// var ShowButton = document.getElementById("show_button"); 
+// ShowButton.style.display ="block";
+    for(var i = 0; i < edit.length; i++){
+        edit[i].addEventListener('click',function(){
+         
+        var HideComment = this.parentNode.parentNode;
+        
+        HideComment.style.display ="none";
+        
+        
+        },false);
+    }
+},false);
+

@@ -147,13 +147,17 @@ body{
 }
 
 
-}
-
 .button4:hover {
   box-shadow    : none;        /* カーソル時の影消去 */
   color         : #1a1aff;     /* 背景色     */
   background    : #ffffff;     /* 文字色     */
 }
+
+#show_button{
+  display: none;
+}
+
+
 
 
 /*-----------------ボタン--------------------*/
@@ -188,6 +192,13 @@ body{
 .post h2{
   padding: 5px 0px 0px 20px;
 }
+
+@media (max-width:500px) {
+.post h2{
+  font-size: 20px;
+}
+ }
+
 
 .post img{
   width: 70px;
@@ -244,6 +255,13 @@ body{
 .create_rule{
   text-align: center;
   color: red;
+}
+
+@media (max-width:767px) {
+.create_tit, .create_youtube, .create_file{
+  display: block;
+  text-align: left;
+} 
 }
 
 
@@ -433,7 +451,9 @@ body{
     height: auto;
 }
 
+@media (max-width:767px) {
 
+}
 
 
 
