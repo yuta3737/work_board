@@ -69,7 +69,7 @@
             </div>
               
     
-        <form name="faceForm" id="move"　action="/comments/{{$post->id}}" class="comment_form col-md-8" method="POST" enctype="multipart/form-data">
+        <form name="faceForm" id="move" action="/comments/{{$comment}}" class="comment_form col-md-8" method="POST" enctype="multipart/form-data">
             @csrf
                 <input  name="face" type="hidden" name="reply" placeholder="返信したい投稿のIDを記入"/>
                 <div id="reply_comment">
@@ -146,10 +146,9 @@
                       <p class='body'>{{ $comment->body }}</p>
                       
                     <div class="comment_command">  
-                    <div class="button02">    
-                    
-                    <a href="/comments/{{ $comment->id }}/edit">編集する</a>
-                    </div>   
+                 
+                    <button class="edit_btn button4" id='edit_btn'>編集する</button>
+                    <button id='show_button'>編集する</button>  
                     
                     <form class="flexbox" action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post">
                     @csrf
