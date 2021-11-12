@@ -10,8 +10,10 @@ var btn2 = document.querySelectorAll(".btn2");
 
     for(var j = 0; j < btn2.length; j++){
         btn2[j].addEventListener('click',function(){
-    var str =  this.value;
+        
+    var str = this.value;
 	document.faceForm.face.value  = str;
+	
 	
 	text1.innerHTML = "返信するコメントのID : " + document.faceForm.face.value;
 	text3.innerHTML = "返信を取り消す";
@@ -34,19 +36,35 @@ text3.addEventListener("click",function loseTF()
 });
 
 
+
 document.addEventListener('DOMContentLoaded',function(){
 var edit = document.querySelectorAll(".edit_btn");
-// var ShowButton = document.getElementById("show_button"); 
-// ShowButton.style.display ="block";
+
     for(var i = 0; i < edit.length; i++){
         edit[i].addEventListener('click',function(){
-         
+            
+        var NoneDisplay = document.querySelectorAll(".noneDisplay"); 
+	    [].forEach.call(NoneDisplay, function(elem) {
+	    elem.classList.remove('noneDisplay');
+	    });
+	    
+        var NoneForm = document.querySelectorAll(".blockDisplay"); 
+	    [].forEach.call(NoneForm, function(elem) {
+	    elem.classList.remove('blockDisplay');
+	    });	    
+	    
         var HideComment = this.parentNode.parentNode;
+        var HideForm = this.parentNode.parentNode.nextElementSibling;
         
-        HideComment.style.display ="none";
         
+        HideComment.classList.add('noneDisplay');
+        HideForm.classList.add('blockDisplay');
+        
+
+
         
         },false);
+        
     }
 },false);
 
