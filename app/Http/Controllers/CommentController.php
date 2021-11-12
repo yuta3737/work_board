@@ -21,6 +21,7 @@ class CommentController extends Controller
 
   public function store(CommentRequest $request)
     {
+      
       $comment = new Comment;
       if($request->file('image') == null){
         $image = null;
@@ -48,6 +49,7 @@ class CommentController extends Controller
       // コメントが該当する投稿のpost_idを取得
       $comment->post_id = $request->post_id;
       $comment->save();
+      // dd($comment);
       return redirect('/posts/' . $comment->post_id);  
     }
     

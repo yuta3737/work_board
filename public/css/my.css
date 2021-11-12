@@ -45,6 +45,21 @@ body{
 .clear{
   clear: both;
 }
+
+
+.noneDisplay{
+  display: none;
+}
+
+.hideform{
+  display: none;
+}
+
+.blockDisplay{
+  display: block;
+}
+
+
 /*-----------------ボタン--------------------*/
 .button1 {
   display       : inline-block;
@@ -157,6 +172,9 @@ body{
   display: none;
 }
 
+#switch{
+  display: none;
+}
 
 
 
