@@ -14,24 +14,19 @@
 </head>
 
 <body>
+    @section('content')
     <div class="container">
         <div class='show_post'>
-
+            <!--------投稿編集------------>
             <div class='first_row'>
-                <div class="button03 col-md-4">
-                    <a href="/posts/{{ $post->id }}/edit">編集する</a>
+                <div class="button03">
+                    <a href="/posts/{{ $post->id }}/edit">投稿編集</a>
                 </div>
-
-                <div class="button03 col-md-4">
-                    <a href="/">戻る</a>
-                </div>
-
-
             </div>
-
+            <!--------投稿---------->
             <div class='second_row'>
                 @if ($post->image_path == null)
-                <!-- 画像を表示 -->
+                <!--画像を表示 -->
                 <div class="image">
                     <img src="{{ asset('images/02.png') }}">
                 </div>
@@ -43,9 +38,9 @@
                 @endif
                 <h2 class='title'>{{ $post->title }}</h2>
             </div>
-
+            <!-------->
         </div>
-
+        <!---------YouTube関連動画表示----------->
         <div class="youtube_content col-md-4">
             <div class="youtube_body">
                 <div class="youtube_head">
@@ -70,18 +65,21 @@
             </div>
         </div>
 
-
+        <!------------コメント投稿-------------->
         <form name="faceForm" id="move" action="../comments" class="comment_form col-md-8" method="POST" enctype="multipart/form-data">
             @csrf
+            <!--post_id取得-->
             <input type="hidden" value="{{$post->id}}" name="post_id">
+            <!--返信するIDの取得-->
             <input name="face" type="hidden" name="reply" placeholder="返信したい投稿のIDを記入" />
+            <!--返信するIDの取得を表示する-->
             <div id="reply_comment">
 
             </div>
-
-
+            <!-----コメント------->
             <textarea class="col-md-12" type="text" name="body" placeholder="コメントを書く"></textarea>
             <p class="title__error" style="color:red;text-align:left">{{ $errors->first('body') }}</p>
+            
             <div class="comment_create">
                 <p class="col-md-6">YouTubeを表示する</p>
 
@@ -96,20 +94,13 @@
             <input class="btn btn-primary" type="submit" value="コメントする" />
 
         </form>
-
+        <!-------->
 
 
 
 
         <div class="show_top">
-            <div class="button03 col-md-6">
-                <a href='/comments/{{ $post->id }}/create'>コメントする</a>
-            </div>
             <form action="/posts/{{ $post->id }}" method="GET" class="show_form col-md-6">
-
-                <!--<div class="col-md-4">-->
-                <!--    <p>コメントを検索する</p>-->
-                <!--</div>     -->
                 <div class="col-md-6">
                     <input type="text" name="keyword" value="{{$keyword}}">
                     <input type="submit" value="検索">
@@ -200,20 +191,66 @@
 
         {{ $comments->appends(request()->input())->links() }}
 
+        <!---------スマホサイズの時のみ YouTube関連動画表示----------->
+        <div class="sp_youtube_content">
+            <div class="youtube_body">
+                <div class="youtube_head">
+                    <h2>関連動画</h2>
+                </div>
+                @foreach ($snippets as $snippet)
+                <div class="sp_youtube_videos">
+                    <a href="https://youtu.be/{{ $snippet->id->videoId }}">
+                        <div class="sp_youtube_link">
+                            <div class="sp_youtube_title">
+                                {{ $snippet->snippet->title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                @endforeach
+            </div>
+        </div>
+
 
         <div class="show_end">
-            <div class="button03 col-md-4">
+            <div class="button03 sp_show_end">
                 <a href="/">戻る</a>
             </div>
 
-            <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline" class="">
+            <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" class="show_delete">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="button1">delete</button>
+                <button type="submit" class="button1">投稿を消去する</button>
             </form>
         </div>
 
     </div>
+    @endsection
+    <!--------ヘッダー---------->
+    @extends('layouts.app')
+
+    @section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Dashboard</div>
+
+                    <div class="card-body">
+                        @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                        @endif
+
+                        You are logged in!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endsection
 
     <script type="module" text="javascript" src="{{ asset('js/show.js') }}"></script>
 </body>

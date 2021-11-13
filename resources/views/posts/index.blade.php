@@ -11,20 +11,18 @@
 
 <body>
     @section('content')
-
-
     <div class="container">
-
+        <!--------検索フォーム---------->
         <form action="/" method="GET" class="search">
             <p><input type="text" name="keyword" value="{{$keyword}}">
                 <input type="submit" value="検索">
             </p>
         </form>
-
+        <!--------新規投稿ボタン---------->
         <div class="button03">
             <a href='/posts/create'>新しく投稿する</a>
         </div>
-
+        <!--------投稿---------->
         <div class='posts'>
             @foreach ($posts as $post)
             <a href="/posts/{{ $post->id }}">
@@ -45,7 +43,7 @@
             </a>
             @endforeach
         </div>
-
+        <!--------->
         <div class='paginate'>
             {{ $posts->appends(request()->input())->links() }}
         </div>
@@ -54,7 +52,8 @@
         <p>©2021 Yuta Sasaki</p>
     </footer>
     @endsection
-
+    
+    <!--------ヘッダー---------->
     @extends('layouts.app')
 
     @section('content')
