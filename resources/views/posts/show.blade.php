@@ -221,7 +221,7 @@
             <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" class="show_delete">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="button1">投稿を消去する</button>
+                <button type="submit" class="button1" onclick='return confirm("削除しますか？");'>投稿を消去する</button>
             </form>
         </div>
 
