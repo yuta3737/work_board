@@ -1,7 +1,6 @@
 
 var text1 = document.createElement("p");
 var text3 = document.createElement("button");
-var x = document.getElementById("reply_comment");
 
 
 document.addEventListener('DOMContentLoaded',function(){
@@ -14,6 +13,7 @@ var btn2 = document.querySelectorAll(".btn2");
     var str = this.value;
 	document.faceForm.face.value  = str;
 	
+	var x = document.getElementById("reply_comment");
 	
 	text1.innerHTML = "返信するコメントのID : " + document.faceForm.face.value;
 	text3.innerHTML = "返信を取り消す";
@@ -21,7 +21,6 @@ var btn2 = document.querySelectorAll(".btn2");
 	text3.setAttribute('class', 'button4');
 	x.appendChild(text1);
 	x.appendChild(text3);
-            
         },false);
     }
 },false);
@@ -67,4 +66,5 @@ var edit = document.querySelectorAll(".edit_btn");
         
     }
 },false);
+
 
