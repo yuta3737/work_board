@@ -6,8 +6,7 @@
 https://enigmatic-dusk-59032.herokuapp.com/
 #### 制作意図
 プロ野球などの野球の試合が行われた後は、誰でも誰かと感想を言い合いたいものだと思い、この掲示板を作りました。
-<img src="https://user-images.githubusercontent.com/75056980/142479727-feb16d6b-4bc4-43c6-99ad-2176416f552c.gif" width="50%">
-<img src="https://user-images.githubusercontent.com/75056980/142479754-8cd3dd87-4adc-43d0-a40c-769c2510c911.gif" width="50%">
+<img src="https://user-images.githubusercontent.com/75056980/142479727-feb16d6b-4bc4-43c6-99ad-2176416f552c.gif" width="50%"><img src="https://user-images.githubusercontent.com/75056980/142479754-8cd3dd87-4adc-43d0-a40c-769c2510c911.gif" width="50%">
 ![編集切り替え](https://user-images.githubusercontent.com/75056980/142479727-feb16d6b-4bc4-43c6-99ad-2176416f552c.gif)
 ![返信](https://user-images.githubusercontent.com/75056980/142479754-8cd3dd87-4adc-43d0-a40c-769c2510c911.gif)
 #### 工夫したポイント
