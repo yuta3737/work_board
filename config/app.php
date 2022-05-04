@@ -226,5 +226,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-'key_name' => env('GOOGLE_API_KEY'),//追記
+    
+'google_api' => env('GOOGLE_API_KEY'),    
 ];

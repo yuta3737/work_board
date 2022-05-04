@@ -100,7 +100,7 @@ public function create(Post $post,Request $request)
       
         // Googleへの接続情報のインスタンスを作成と設定
         $client = new Google_Client();
-        $key ='AIzaSyCPCFjrI7aEOlKResgpSJiROxyiuHTvO5Q';
+        $key = config('app.google_api');
         $client->setDeveloperKey($key);
         $searchWord = $post->title;
         // 接続情報のインスタンスを用いてYoutubeのデータへアクセス可能なインスタンスを生成
